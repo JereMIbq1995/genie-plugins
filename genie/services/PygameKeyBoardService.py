@@ -7,5 +7,5 @@ class KeyBoardService():
     def is_key_pressed(self, *keys):
         pass
 
-    def is_key_released(self, *key):
+    def is_key_released(self, *keys):
         pass
