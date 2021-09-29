@@ -1,18 +1,10 @@
-This is the core of the Genie game framework. It consists of important components including: <br>
+This is the pluggins layer of the Genie game engine project. It contains the implementations of the following important services:<br>
 <ul>
-    <li> Dirrector</li>
-    <li> Cast </li>
-    <ul>
-        <li>actor</li>
-        <li>actors</li>
-        <li>traits</li>
-    </ul>
-    <li> Script </li>
-    <ul>
-        <li> Action </li>
-        <li> Actions </li>
-        <li> Clock </li>
-        <li> Input Action </li>
-        <li> Update Action </li>
-    </ul>
+    <li> KeyboardService</li>
+    <li> MouseService</li>
+    <li> PhysicsService </li>
+    <li> GamepadService </li>
+    <li> AudioService </li>
+    <li> ScreenService </li>
+    <li> NetworkService </li>
 </ul>
