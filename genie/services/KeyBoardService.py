@@ -14,22 +14,8 @@ class KeyBoardService():
             Return Value:
                 The function will return a DICT that maps the key to either 1 or 0,
                     with 1 meaning the key is pressed and 0 meaning otherwise.
-            
-            Example: If the user wants to check whether the UP, DOWN, LEFT, RIGHT
-                        are pressed, the function can be called as followed:
-
-                            is_key_pressed(keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT)
-                    
-                     If the UP and RIGHT keys are pressed, but the DOWN and LEFT
-                        are not, this function will return the following dictionary:
-
-                            {
-                                keys.UP : 1,
-                                keys.DOWN : 0,
-                                keys.LEFT : 0,
-                                keys.RIGHT : 1
-                            }
         """
+
         keys_pressed = {}
         keys_state = pygame.key.get_pressed()
         
@@ -39,4 +25,13 @@ class KeyBoardService():
         return keys_pressed
 
     def is_key_released(self, *keys):
-        pass
+        """
+            Similar to is_key_pressed, but return 1 for released and 0 for pressed
+        """
+        keys_released = {}
+        keys_state = pygame.key.get_pressed()
+
+        for key in keys:
+            keys_released[key] = (keys_state[key] + 1) % 2
+        
+        return keys_released
