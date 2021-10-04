@@ -3,9 +3,10 @@ from genie.constants import keys
 
 class KeyBoardService():
     def __init__(self):
-        pass
+        if not pygame.get_init():
+            pygame.init()
 
-    def is_key_pressed(self, *keys):
+    def get_keys_state(self, *keys):
         """
             keys: a tuple of keys that whoever calls this function
                 wants to check whether is pressed.
@@ -13,25 +14,29 @@ class KeyBoardService():
             
             Return Value:
                 The function will return a DICT that maps the key to either 1 or 0,
-                    with 1 meaning the key is pressed and 0 meaning otherwise.
+                    with 1 meaning the key is pressed and 0 meaning it's not pressed.
+            
+            Note: There is a chance that some keys might not get detected if multiple
+                keys are pressed at the same time
         """
 
         keys_pressed = {}
         keys_state = pygame.key.get_pressed()
-        
         for key in keys:
             keys_pressed[key] = keys_state[key]
         
         return keys_pressed
 
-    def is_key_released(self, *keys):
+    def is_key_pressed(self, key):
         """
-            Similar to is_key_pressed, but return 1 for released and 0 for pressed
+            check to see if a key is pressed. Returns True for pressed and False for released
         """
-        keys_released = {}
-        keys_state = pygame.key.get_pressed()
-
-        for key in keys:
-            keys_released[key] = (keys_state[key] + 1) % 2
-        
-        return keys_released
+        keys_state_dict = self.get_keys_state(key)
+        return keys_state_dict[key]
+    
+    def is_key_released(self, key):
+        """
+            Similar to is_key_pressed, but returns True for released and False for pressed
+        """
+        keys_state_dict = self.get_keys_state(key)
+        return keys_state_dict[key] ^ 1

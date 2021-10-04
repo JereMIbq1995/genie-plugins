@@ -3,9 +3,10 @@ from genie.constants import mouse
 
 class MouseService:
     def __init__(self):
-        self._movement = (0, 0)
+        if not pygame.get_init():
+            pygame.init()
 
-    def is_button_pressed(self, *buttons):
+    def is_button_pressed(self, button):
         """
             buttons: a tuple of mouse buttons that whoever calls this function
                 wants to check whether is pressed.
@@ -15,26 +16,16 @@ class MouseService:
                 The function will return a DICT that maps the key to either True or False,
                     indicating whether the mouse button is pressed or not
         """
-        mouse_buttons_pressed = {}
         mouse_buttons_state = pygame.mouse.get_pressed(num_buttons=5)
-
-        for button in buttons:
-            mouse_buttons_pressed[button] = mouse_buttons_state[button]
-        
-        return mouse_buttons_pressed
+        return mouse_buttons_state[button]
         
 
-    def is_button_released(self, *buttons):
+    def is_button_released(self, button):
         """
             Similar to is_button_pressed() but give the opposite result
         """
-        mouse_buttons_released = {}
         mouse_buttons_state = pygame.mouse.get_pressed(num_buttons=5)
-
-        for button in buttons:
-            mouse_buttons_released[button] = (mouse_buttons_state[button] + 1) % 2
-
-        return mouse_buttons_released
+        return (mouse_buttons_state[button] + 1) % 2
 
     def has_mouse_moved(self):
         """
@@ -42,8 +33,8 @@ class MouseService:
             If both x and y movements are 0, then the mouse has not moved.
             Otherwise, the mouse has moved. Return a bool.
         """
-        self._movement = pygame.mouse.get_rel()
-        if self._movement[0] == 0 and self._movement[1] == 0:
+        movement = pygame.mouse.get_rel()
+        if movement[0] == 0 and movement[1] == 0:
             return False
         else:
             return True
@@ -54,11 +45,3 @@ class MouseService:
             as a tuple.
         """
         return pygame.mouse.get_pos()
-
-    def get_last_coordinates(self):
-        """
-            This one needs a little bit more thoughts
-        """
-        current = pygame.mouse.get_pos()
-        last_coordinates = (current[0] - self._movement[0], current[1] - self._movement[1])
-        return last_coordinates
