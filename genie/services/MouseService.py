@@ -3,7 +3,7 @@ from genie.constants import mouse
 
 class MouseService:
     def __init__(self):
-        pass
+        self._movement = (0, 0)
 
     def is_button_pressed(self, *buttons):
         """
@@ -37,21 +37,28 @@ class MouseService:
         return mouse_buttons_released
 
     def has_mouse_moved(self):
-        movement = pygame.mouse.get_rel()
-        if movement[0] == 0 and movement[1] == 0:
+        """
+            Looks at the movement of the mouse compared to the last frame:
+            If both x and y movements are 0, then the mouse has not moved.
+            Otherwise, the mouse has moved. Return a bool.
+        """
+        self._movement = pygame.mouse.get_rel()
+        if self._movement[0] == 0 and self._movement[1] == 0:
             return False
         else:
             return True
 
     def get_current_coordinates(self):
+        """
+            Simply ask pygame for the position of the mouse and return it
+            as a tuple.
+        """
         return pygame.mouse.get_pos()
 
     def get_last_coordinates(self):
         """
             This one needs a little bit more thoughts
         """
-        return (0, 0)
-        # movement = pygame.mouse.get_rel()
-        # current = pygame.mouse.get_pos()
-        # last_coordinates = (current[0] - movement[0], current[1] - movement[1])
-        # return last_coordinates
+        current = pygame.mouse.get_pos()
+        last_coordinates = (current[0] - self._movement[0], current[1] - self._movement[1])
+        return last_coordinates
