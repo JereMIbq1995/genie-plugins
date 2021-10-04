@@ -43,27 +43,31 @@ def main():
                 running = False
 
         # Test is_key_pressed():
-        mouse_pressed = ms.is_button_pressed(
-            mouse.LEFT, mouse.MIDDLE, mouse.RIGHT, mouse.EXTRA1, mouse.EXTRA2)
+        left_pressed = ms.is_button_pressed(mouse.LEFT)
+        middle_pressed = ms.is_button_pressed(mouse.MIDDLE)
+        right_pressed = ms.is_button_pressed(mouse.RIGHT)
+        extra1_pressed = ms.is_button_pressed(mouse.EXTRA1)
+        extra2_pressed = ms.is_button_pressed(mouse.EXTRA2)
 
-        if mouse_pressed[mouse.LEFT]:
+        if left_pressed:
             print("LEFT mouse is pressed")
-        if mouse_pressed[mouse.MIDDLE]:
+        if middle_pressed:
             print("MIDDLE mouse is pressed")
-        if mouse_pressed[mouse.RIGHT]:
+        if right_pressed:
             print("RIGHT mouse is pressed")
-        if mouse_pressed[mouse.EXTRA1]:
+        if extra1_pressed:
             print("EXTRA1 mouse is pressed")
-        if mouse_pressed[mouse.EXTRA2]:
+        if extra2_pressed:
             print("EXTRA2 mouse is pressed")
 
         # Test is_key_released():
-        mouse_released = ms.is_button_released(
-            mouse.LEFT, mouse.MIDDLE, mouse.RIGHT, mouse.EXTRA1, mouse.EXTRA2)
+        left_released = ms.is_button_released(mouse.LEFT)
+        middle_released = ms.is_button_released(mouse.MIDDLE)
+        right_released = ms.is_button_released(mouse.RIGHT)
+        extra1_released = ms.is_button_released(mouse.EXTRA1)
+        extra2_released = ms.is_button_released(mouse.EXTRA2)
 
-        if (mouse_released[mouse.LEFT] and mouse_released[mouse.MIDDLE] and
-                mouse_released[mouse.RIGHT] and mouse_released[mouse.EXTRA1] and
-                mouse_released[mouse.EXTRA2]):
+        if (left_released and middle_released and right_released and extra1_released and extra2_released):
             print("All mouse buttons released!")
         
         # Test has_mouse_moved()
@@ -73,12 +77,6 @@ def main():
         # Test get_current_coordinates()
         mouse_position = ms.get_current_coordinates()
         print ("Mouse coordinates: ", mouse_position)
-
-        # Test get_last_coordinates()
-        mouse_last_coordinates = ms.get_last_coordinates()
-        print ("Last coordinates: ", mouse_last_coordinates)
-
-
 
     pygame.quit()
 

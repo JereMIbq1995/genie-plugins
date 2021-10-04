@@ -32,6 +32,10 @@ def main():
     # Game loop:
     clock = pygame.time.Clock()
     running = True
+    if not pygame.get_init():
+        pygame.init()
+        pygame.key.set_repeat(1)
+
     while running:
         clock.tick(FPS)
         for event in pygame.event.get():
@@ -39,22 +43,36 @@ def main():
                 running = False
         
         # Test is_key_pressed():
-        keys_pressed = ks.is_key_pressed(keys.A, keys.W, keys.S, keys.D)
+        a_pressed = ks.is_key_pressed(keys.A)
+        w_pressed = ks.is_key_pressed(keys.W)
+        s_pressed = ks.is_key_pressed(keys.S)
+        d_pressed = ks.is_key_pressed(keys.D)
+        f_pressed = ks.is_key_pressed(keys.F)
 
-        if keys_pressed[keys.A]:
+        if a_pressed:
             print("A is pressed")
-        if keys_pressed[keys.W]:
+        if w_pressed:
             print("W is pressed")
-        if keys_pressed[keys.S]:
+        if s_pressed:
             print("S is pressed")
-        if keys_pressed[keys.D]:
+        if d_pressed:
             print("D is pressed")
+        if f_pressed:
+            print("F is pressed")
+
+        # Test get_keys_state():
+        keys_state = ks.get_keys_state(keys.A, keys.W, keys.S, keys.D, keys.F)
+        print(keys_state)
         
         # Test is_key_released():
-        keys_released = ks.is_key_released(keys.A, keys.W, keys.S, keys.D)
+        a_released = ks.is_key_released(keys.A)
+        w_released = ks.is_key_released(keys.W)
+        s_released = ks.is_key_released(keys.S)
+        d_released = ks.is_key_released(keys.D)
 
-        if keys_released[keys.A] and keys_released[keys.W] and keys_released[keys.S] and keys_released[keys.D]:
-            print("All keys released!")
+        if a_released and w_released and s_released and d_released:
+            # print("All keys released!")
+            pass
     
     pygame.quit()
 
