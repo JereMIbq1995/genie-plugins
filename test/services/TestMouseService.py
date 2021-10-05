@@ -5,8 +5,8 @@ import pygame
 sys.path.append('..\\..')
 sys.path.append('..')
 
-from genie.constants import mouse
-from genie.services.MouseService import MouseService
+from genie_plugins.constants import mouse
+from genie_plugins.services.PygameMouseService import PygameMouseService
 
 FPS = 60
 W_SIZE = (900, 500)
@@ -31,7 +31,7 @@ def main():
 
     """
     # What we're trying to test:
-    ms = MouseService()
+    ms = PygameMouseService()
 
     # Game loop:
     clock = pygame.time.Clock()

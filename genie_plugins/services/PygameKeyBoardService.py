@@ -1,7 +1,7 @@
 import pygame
-from genie.constants import keys
+from genie_plugins.constants import keys
 
-class KeyBoardService():
+class PygameKeyBoardService():
     def __init__(self):
         if not pygame.get_init():
             pygame.init()

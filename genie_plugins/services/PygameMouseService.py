@@ -1,7 +1,7 @@
 import pygame
-from genie.constants import mouse
+from genie_plugins.constants import mouse
 
-class MouseService:
+class PygameMouseService:
     def __init__(self):
         if not pygame.get_init():
             pygame.init()

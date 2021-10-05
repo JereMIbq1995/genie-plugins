@@ -5,8 +5,8 @@ import pygame
 sys.path.append('..\\..')
 sys.path.append('..')
 
-from genie.services.KeyBoardService import KeyBoardService
-from genie.constants import keys
+from genie_plugins.services.PygameKeyBoardService import PygameKeyBoardService
+from genie_plugins.constants import keys
 
 FPS = 60
 W_SIZE = (900, 500)
@@ -27,7 +27,7 @@ def main():
 
     """
     # What we're trying to test:
-    ks = KeyBoardService()
+    ks = PygameKeyBoardService()
 
     # Game loop:
     clock = pygame.time.Clock()
