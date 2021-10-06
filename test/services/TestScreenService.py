@@ -68,12 +68,12 @@ def main():
     # Creating a yellow_space_ship:
     yellow_space_ship = Actor()
     yellow_space_ship.add_trait(Body(200, 250, 40, 55))
-    yellow_space_ship.add_trait(Image("C:/Users/Jeremy Duong/Projects/genie-plugins/test/assets/spaceship_yellow.png", 1, 90))
+    yellow_space_ship.add_trait(Image("../../test/assets/spaceship_yellow.png", 1, 90))
     
     # Creating a red_space_ship:
     red_space_ship = Actor()
     red_space_ship.add_trait(Body(700, 250, 40, 55))
-    red_space_ship.add_trait(Image("C:/Users/Jeremy Duong/Projects/genie-plugins/test/assets/spaceship_red.png", 1, 270))
+    red_space_ship.add_trait(Image("../../test/assets/spaceship_red.png", 1, 270))
 
     # Add the 2 spaceships to the cast:
     game_cast.add_actor(yellow_space_ship)
