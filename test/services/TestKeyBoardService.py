@@ -5,7 +5,7 @@ import pygame
 sys.path.append('..\\..')
 sys.path.append('..')
 
-from genie_plugins.services.PygameKeyBoardService import PygameKeyBoardService
+from genie_plugins.services.PygameKeyboardService import PygameKeyBoardService
 from genie_plugins.constants import keys
 
 FPS = 60
