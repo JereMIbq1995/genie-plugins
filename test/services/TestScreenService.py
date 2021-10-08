@@ -24,23 +24,23 @@ BLACK = (0, 0, 0, 0)
 VEL = 5
 
 def yellow_input(keys_state, ship : Actor):
-    if keys_state[keys.A]:
+    if keys_state[keys.A] and ship.get_trait(Body).get_position()[0] > 0:
         ship.get_trait(Body).incr_x(-VEL)
-    if keys_state[keys.D]:
+    if keys_state[keys.D] and ship.get_trait(Body).get_position()[0] < W_SIZE[0] / 2:
         ship.get_trait(Body).incr_x(VEL)
-    if keys_state[keys.S]:
+    if keys_state[keys.S] and ship.get_trait(Body).get_position()[1] < W_SIZE[1]:
         ship.get_trait(Body).incr_y(VEL)
-    if keys_state[keys.W]:
+    if keys_state[keys.W] and ship.get_trait(Body).get_position()[1] > 0: 
         ship.get_trait(Body).incr_y(-VEL)
 
 def red_input(keys_state, ship : Actor):
-    if keys_state[keys.LEFT]:
+    if keys_state[keys.LEFT] and ship.get_trait(Body).get_position()[0] > W_SIZE[0] / 2:
         ship.get_trait(Body).incr_x(-VEL)
-    if keys_state[keys.RIGHT]:
+    if keys_state[keys.RIGHT] and ship.get_trait(Body).get_position()[0] < W_SIZE[0]:
         ship.get_trait(Body).incr_x(VEL)
-    if keys_state[keys.DOWN]:
+    if keys_state[keys.DOWN] and ship.get_trait(Body).get_position()[1] < W_SIZE[1]:
         ship.get_trait(Body).incr_y(VEL)
-    if keys_state[keys.UP]:
+    if keys_state[keys.UP] and ship.get_trait(Body).get_position()[1] > 0:
         ship.get_trait(Body).incr_y(-VEL)
 
 def main():
@@ -95,7 +95,7 @@ def main():
 
         # Draw everything:
         WIN.fill(WHITE)
-        ss.draw_images(game_cast, WIN)
+        ss.draw_images(game_cast)
     
     pygame.quit()
 
