@@ -23,6 +23,7 @@ class PygameScreenService:
         if not pygame.get_init():
             pygame.init()
         self._images_cache = {}
+        self._window = pygame.display.get_surface()
     
     def initialize(self):
         pass
@@ -49,18 +50,19 @@ class PygameScreenService:
             image_path = actor.get_trait(Image).get_path()
             self._images_cache[image_path] = self._load_image(actor)
 
-    def draw_images(self, actors : Actors, window : pygame.Surface):
+    def draw_images(self, actors : Actors, lerp : float = 0):
         """
-            first thing: check to see if it's in the cache
+            actors: actors that need to be drew
+            lerp: linear interpolation
         """
         actors_with_body_image = actors.with_traits(Body, Image)
         for actor in actors_with_body_image:
             position = actor.get_trait(Body).get_position()
             image_path = actor.get_trait(Image).get_path()
             if image_path in self._images_cache.keys():
-                window.blit(self._images_cache[image_path], position)
+                self._window.blit(self._images_cache[image_path], position)
             else:
-                window.blit(self._load_image(actor), position)
+                self._window.blit(self._load_image(actor), position)
         
         pygame.display.update()
 
