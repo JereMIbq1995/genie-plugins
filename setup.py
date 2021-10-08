@@ -8,12 +8,11 @@ setuptools.setup(
     version="0.0.1",
     author="Jeremy Duong",
     author_email="jeremibq@gmail.com",
-    description="A small example calculator package",
+    description="genie-pluggins",
     long_description=long_description,
     long_description_content_type="text/markdown",
     # url="https://github.com/pypa/sampleproject",
     # project_urls={
-    #     "Bug Tracker": "https://github.com/pypa/sampleproject/issues",
     # },
     classifiers=[
         "Programming Language :: Python :: 3",
