@@ -18,7 +18,8 @@ from genie_plugins.services.PygameKeyboardService import PygameKeyboardService
 
 FPS = 120
 W_SIZE = (900, 500)
-WIN = pygame.display.set_mode(W_SIZE)
+SCREEN_CENTER = (W_SIZE[0]/2, W_SIZE[1]/2)
+# WIN = pygame.display.set_mode(W_SIZE)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0, 0)
 VEL = 5
@@ -59,11 +60,15 @@ def main():
 
     """
     # What we're trying to test:
-    ss = PygameScreenService()
+    ss = PygameScreenService(W_SIZE)
     ks = PygameKeyboardService()
 
     # First let's create a cast with 2 actors: yellow_space_ship and red_space_ship
     game_cast = Actors()
+
+    background_image = Actor()
+    background_image.add_trait(Body(0, 0, 900, 500))
+    background_image.add_trait(Image("../../test/assets/space.png", 1, 90))
 
     # Creating a yellow_space_ship:
     yellow_space_ship = Actor()
@@ -94,8 +99,7 @@ def main():
         red_input(key_states, red_space_ship)
 
         # Draw everything:
-        WIN.fill(WHITE)
-        ss.draw_images(game_cast)
+        ss.draw_frame(game_cast, background_image=background_image)
     
     pygame.quit()
 
