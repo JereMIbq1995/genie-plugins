@@ -5,6 +5,9 @@ from genie_core.cast.trait import Trait
 from genie_core.cast.Body import Body
 from genie_core.cast.Image import Image
 
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0, 0)
+
 class PygameScreenService:
     """
         - add methods to the interface
@@ -19,26 +22,37 @@ class PygameScreenService:
                 convert image data to what pygame needs
                 use pygame to draw
     """
-    def __init__(self):
+    def __init__(self, window_size):
         if not pygame.get_init():
             pygame.init()
         self._images_cache = {}
-        self._window = pygame.display.get_surface()
+        self._window = pygame.display.set_mode(window_size)
     
     def initialize(self):
         pass
     
     def _load_image(self, actor : Actor):
-        image_path = actor.get_trait(Image).get_path()
-        image = pygame.image.load(image_path)
+        """
+            Takes in an actor that has 2 traits: Body and Image
+                and load the image of that Actor into the cache
+        """
+        body_trait = actor.get_trait(Body)
+        image_trait = actor.get_trait(Image)
+        image_path = image_trait.get_path()
 
-        width = actor.get_trait(Body).get_width()
-        height = actor.get_trait(Body).get_height()
-        rotation = actor.get_trait(Image).get_rotation()
+        image = pygame.image.load(image_trait.get_path())
+        width = body_trait.get_width()
+        height = body_trait.get_height()
+        rotation = image_trait.get_rotation()
 
         transformed_image = pygame.transform.rotate(
             pygame.transform.scale(image, (width, height)), 
             rotation)
+        
+        # put image in cache so we don't have to load again
+        if (image_path not in self._images_cache.keys()):
+            self._images_cache[image_path] = transformed_image
+
         return transformed_image
 
     def load_images(self, actors : Actors):
@@ -49,6 +63,24 @@ class PygameScreenService:
         for actor in actors_with_image:
             image_path = actor.get_trait(Image).get_path()
             self._images_cache[image_path] = self._load_image(actor)
+
+    def draw_frame(self, actors: Actors, color = WHITE, background_image : Actor = None, lerp : float = 0):
+        self.draw_background(color, background_image)
+        self.draw_images(actors, lerp)
+        pygame.display.update()
+
+
+    def draw_background(self, color : tuple, background_image : Actor = None):
+        self._window.fill(color)
+        if background_image != None:
+            position = background_image.get_trait(Body).get_position()
+            path = background_image.get_trait(Image).get_path()
+            if path not in self._images_cache.keys():
+                self._window.blit(self._load_image(background_image), position)
+            else:
+                self._window.blit(self._images_cache[path], position)
+        
+        # pygame.display.update()
 
     def draw_images(self, actors : Actors, lerp : float = 0):
         """
@@ -64,7 +96,7 @@ class PygameScreenService:
             else:
                 self._window.blit(self._load_image(actor), position)
         
-        pygame.display.update()
+        # pygame.display.update()
 
     def release(self):
         pass
