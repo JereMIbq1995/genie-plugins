@@ -6,6 +6,15 @@ class PygameKeyboardService():
         if not pygame.get_init():
             pygame.init()
 
+    def is_quit(self):
+        """
+            tell the user whether the X button on the top right is pressed
+        """
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return True
+        return False
+
     def get_keys_state(self, *keys):
         """
             keys: a tuple of keys that whoever calls this function
