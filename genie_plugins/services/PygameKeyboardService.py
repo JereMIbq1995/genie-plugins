@@ -28,7 +28,7 @@ class PygameKeyboardService():
             Note: There is a chance that some keys might not get detected if multiple
                 keys are pressed at the same time
         """
-
+        pygame.event.pump()
         keys_pressed = {}
         keys_state = pygame.key.get_pressed()
         for key in keys:
