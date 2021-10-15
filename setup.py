@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="UTF-8") as f:
 
 setuptools.setup(
     name="genie-plugins-jeremi1995",
-    version="0.0.4",
+    version="0.0.5",
     author="Jeremy Duong",
     author_email="jeremibq@gmail.com",
     description="genie-pluggins",
