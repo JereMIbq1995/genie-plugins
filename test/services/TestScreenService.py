@@ -20,6 +20,8 @@ FPS = 120
 W_SIZE = (900, 500)
 SCREEN_CENTER = (W_SIZE[0]/2, W_SIZE[1]/2)
 # WIN = pygame.display.set_mode(W_SIZE)
+START_POS_1 = (W_SIZE[0]/5, W_SIZE[1]/2)
+START_POS_2 = (4*W_SIZE[0]/5, W_SIZE[1]/2)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0, 0)
 VEL = 5
@@ -67,18 +69,18 @@ def main():
     game_cast = Actors()
 
     background_image = Actor()
-    background_image.add_trait(Body(0, 0, 900, 500))
-    background_image.add_trait(Image("../../test/assets/space.png", 1, 90))
+    background_image.add_trait(Body(0, 0, 0, 0, 900, 500))
+    background_image.add_trait(Image("../../test/assets/space.png", 0.5, 90))
 
     # Creating a yellow_space_ship:
     yellow_space_ship = Actor()
-    yellow_space_ship.add_trait(Body(200, 250, 40, 55))
-    yellow_space_ship.add_trait(Image("../../test/assets/spaceship_yellow.png", 1, 90))
+    yellow_space_ship.add_trait(Body(200, 250, 0, 0, 40, 55))
+    yellow_space_ship.add_trait(Image("../assets/spaceship_yellow.png", 0.1, 90))
     
     # Creating a red_space_ship:
     red_space_ship = Actor()
-    red_space_ship.add_trait(Body(700, 250, 40, 55))
-    red_space_ship.add_trait(Image("../../test/assets/spaceship_red.png", 1, 270))
+    red_space_ship.add_trait(Body(700, 250, 0, 0, 40, 55))
+    red_space_ship.add_trait(Image("../assets/spaceship_red.png", 0.1, 270))
 
     # Add the 2 spaceships to the cast:
     game_cast.add_actor(yellow_space_ship)
