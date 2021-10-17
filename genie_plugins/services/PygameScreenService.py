@@ -41,8 +41,10 @@ class PygameScreenService:
         image_path = image_trait.get_path()
 
         image = pygame.image.load(image_trait.get_path())
-        width = body_trait.get_width()
-        height = body_trait.get_height()
+        scale = image_trait.get_scale()
+        width = int(scale * image.get_width())
+        height = int(scale * image.get_height())
+
         rotation = image_trait.get_rotation()
 
         transformed_image = pygame.transform.rotate(
